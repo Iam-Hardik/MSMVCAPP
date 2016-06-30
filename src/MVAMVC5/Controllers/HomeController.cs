@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MVAMVC5.Models;
 
 namespace MVAMVC5.Controllers
 {
+    
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
+        [HttpPost]
+        public  ActionResult About(person pin)
+        {
+            return View(pin);
+        }
+        [HttpGet]
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            ViewData["Message"] = "Here is a person.";
+            var p = new person() {
+                FirstName = "hardik",
+                LastName = "chudasama",
+                BirthDate = new DateTime(1987, 4, 8)
+            };
+            return View(p);
         }
 
         public IActionResult Contact()

@@ -1,7 +1,33 @@
-﻿@{
+﻿@using MVAMVC5.Models
+
+@model person
+
+
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<ul>
+    <li> First : @Model.FirstName</li>
+    <li> Last : @Model.LastName</li>
+    <li> DOB : @Model.BirthDate.ToString("D");</li>
+</ul>
+<form asp-controller="Home" asp-action="About" method="post">
+    <div class="form-group">
+        <label for="fname">First Name:</label>
+        <input asp-for="FirstName" class="form-control" type="text"  />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="lname">Last Name:</label>
+        <input  asp-for="LastName" class="form-control" type="text"/>
+        <div asp-validation-summary="All" ></div>
+    </div>
+    <div class="form-group">
+        <label for="BDate">DOB:</label>
+        <input   asp-for="BirthDate" class="form-control"   />
+    </div>
+    <button  class="btn btn-info" value="Submit" type="submit">Now</button>
+</form>
